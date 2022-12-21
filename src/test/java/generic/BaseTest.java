@@ -27,17 +27,14 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class BaseTest {
+public abstract class BaseTest implements IAutoConst{
 	public static ExtentReports extent;
 	
 	public WebDriver driver;
 	public WebDriverWait wait;
 	public ExtentTest test;
 	
-	public final String PPT_PATH="base.properties";
-	public String REPORT_PATH="./target/Spark.html";
-	
-	static	
+	static
 	{
 		WebDriverManager.chromedriver().setup();
 		WebDriverManager.firefoxdriver().setup();
@@ -59,14 +56,14 @@ public class BaseTest {
 	{
 		path="./properties/"+path;
 		test = extent.startTest(testMethod.getName());
-		test.log(LogStatus.INFO, "property file: "+path);
+		test.log(LogStatus.INFO, "property file:"+path);
 		
-		String useGrid	=	Util.getProperty(path,"USEGRID");
-		String remote 	=	Util.getProperty(path,"REMOTE");
-		String browser 	=	Util.getProperty(path,"BROWSER");
-		String appUrl 	=	Util.getProperty(path,"APPURL");
-		String sITO 	=	Util.getProperty(path,"ITO");
-		String sETO 	=  	Util.getProperty(path,"ETO");
+		String useGrid =  Util.getProperty(path,"USEGRID");
+		String remote =   Util.getProperty(path,"REMOTE");
+		String browser = Util.getProperty(path,"BROWSER");
+		String appUrl = Util.getProperty(path,"APPURL");
+		String sITO = Util.getProperty(path,"ITO");
+		String sETO =  Util.getProperty(path,"ETO");
 		
 		if(useGrid.equalsIgnoreCase("yes"))
 		{
@@ -74,7 +71,8 @@ public class BaseTest {
 			DesiredCapabilities capability = new DesiredCapabilities();
 			capability.setBrowserName(browser);
 			driver =new RemoteWebDriver(new URL(remote),capability );
-		}		
+		}
+		
 		else
 		{
 			test.log(LogStatus.INFO, "Open the "+browser+" Browser in Local System");
@@ -107,7 +105,7 @@ public class BaseTest {
 	public void closeApp(ITestResult result) throws IOException
 	{
 		
-		int status = result.getStatus();
+		int status = result.getStatus();//1-PASS 2-FAILED
 		if(status==2)
 		{
 			String errDetails = result.getThrowable().getMessage();

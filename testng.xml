@@ -5,10 +5,4 @@
       <package name="scripts"/>
     </packages>
   </test> 
-  <test name="TestStaging">
-  <parameter name="config" value="staging.properties"/>
-    <packages>
-      <package name="scripts"/>
-    </packages>
-  </test> 
 </suite> 

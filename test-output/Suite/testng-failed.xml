@@ -4,29 +4,15 @@
   <test thread-count="5" parallel="tests" name="TestQA(failed)">
     <parameter name="config" value="qa.properties"/>
     <classes>
-      <class name="scripts.Script1">
+      <class name="scripts.ValidLogin">
         <methods>
-          <include name="createReport"/>
           <include name="openApp"/>
-          <include name="createCustomer"/>
+          <include name="createReport"/>
           <include name="closeApp"/>
           <include name="publishReport"/>
+          <include name="testValidLogin"/>
         </methods>
-      </class> <!-- scripts.Script1 -->
+      </class> <!-- scripts.ValidLogin -->
     </classes>
   </test> <!-- TestQA(failed) -->
-  <test thread-count="5" parallel="tests" name="TestStaging(failed)">
-    <parameter name="config" value="staging.properties"/>
-    <classes>
-      <class name="scripts.Script1">
-        <methods>
-          <include name="openApp"/>
-          <include name="createReport"/>
-          <include name="createCustomer"/>
-          <include name="closeApp"/>
-          <include name="publishReport"/>
-        </methods>
-      </class> <!-- scripts.Script1 -->
-    </classes>
-  </test> <!-- TestStaging(failed) -->
 </suite> <!-- Failed suite [Suite] -->
